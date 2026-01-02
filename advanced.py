@@ -446,6 +446,7 @@ class AdvancedTranslation(QDialog):
             self.cache = get_cache(cache_id)
             merge_length = self.cache.get_info('merge_length') or 0
             self.merge_enabled = int(merge_length) > 0
+            self.html_translate = self.config.get('html_translate', False)
             paragraphs = self.cache.all_paragraphs()
             if len(paragraphs) < 1:
                 self.alert.pop(

@@ -78,7 +78,7 @@ class AdvancedTranslationTable(QTableWidget):
         items = [original, '--', '--', _('Untranslated')]
         if paragraph.translation:
             before_aligned = paragraph.aligned
-            if self.parent.merge_enabled:
+            if self.parent.merge_enabled and not getattr(self.parent, 'html_translate', False):
                 self.check_line_alignment(paragraph)
             # If the alignment of before and after is the same, do nothing.
             if before_aligned and not paragraph.aligned:
