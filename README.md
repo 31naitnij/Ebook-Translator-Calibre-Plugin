@@ -1,4 +1,4 @@
-# Ebook Translator (Calibre 插件增强版)
+# Ebook Translator (Calibre 插件修改版)
 
 本插件是基于原作者 [bookfere](https://github.com/bookfere) 的 [Ebook-Translator-Calibre-Plugin](https://github.com/bookfere/Ebook-Translator-Calibre-Plugin) 的修改版本。
 
