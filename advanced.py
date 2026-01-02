@@ -1138,6 +1138,9 @@ class AdvancedTranslation(QDialog):
                 translation_text.clear()
             elif isinstance(data, Paragraph):
                 self.table.setCurrentItem(self.table.item(data.row, 0))
+                # Explicitly emit signals to refresh UI boxes during translation
+                self.paragraph_sig.emit(data)
+                self.table.row.emit(data.row)
             else:
                 translation_text.insertPlainText(data)
         self.trans_worker.streaming.connect(streaming_translation)

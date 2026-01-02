@@ -217,6 +217,8 @@ class PageElement(Element):
         parent.remove(element)
 
     def get_content(self):
+        if self.position == 'only' and get_config().get('html_translate'):
+            return get_string(self.element, True)
         element_copy = self._element_copy()
         if self.remove_pattern is not None:
             for noise in element_copy.xpath(
@@ -288,15 +290,18 @@ class PageElement(Element):
                 self._safe_remove(self.element)
             return
 
-        # Escape the markups (<m id=1 />) to replace escaped markups.
-        translation = xml_escape(translation)
-        for rid, element in enumerate(self.reserve_elements):
-            pattern = self.placeholder[1].format(
-                r'\s*'.join(format(rid, '05')))
-            # Prevent processe any backslash escapes in the replacement.
-            translation = re.sub(
-                xml_escape(pattern), lambda _: element, translation)
-        translation = self._polish_translation(translation)
+        if self.position == 'only' and get_config().get('html_translate'):
+            translation = self._polish_translation(translation)
+        else:
+            # Escape the markups (<m id=1 />) to replace escaped markups.
+            translation = xml_escape(translation)
+            for rid, element in enumerate(self.reserve_elements):
+                pattern = self.placeholder[1].format(
+                    r'\s*'.join(format(rid, '05')))
+                # Prevent processe any backslash escapes in the replacement.
+                translation = re.sub(
+                    xml_escape(pattern), lambda _: element, translation)
+            translation = self._polish_translation(translation)
 
         element_name = get_name(self.element)
         new_element = self._create_new_element(element_name, translation)

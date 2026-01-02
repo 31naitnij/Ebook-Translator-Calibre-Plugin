@@ -1,51 +1,16 @@
-__English__ · [简体中文](README.zh-CN.md)
+# Ebook Translator (Calibre 插件增强版)
 
----
+本插件是基于原作者 [bookfere](https://github.com/bookfere) 的 [Ebook-Translator-Calibre-Plugin](https://github.com/bookfere/Ebook-Translator-Calibre-Plugin) 的修改版本。
 
-# Ebook Translator (a Calibre plugin)
+## 主要修改功能
 
-![Ebook Translator Calibre Plugin](images/logo.png)
+- **上下文关联翻译 (Multi-round Translation)**
+  - 支持大语言模型（如 OpenAI, Gemini, DeepSeek）的多轮对话翻译模式。
+  - 可在设置中调节上下文轮数（1-5轮），增加翻译的连贯性。
 
-A Calibre plugin to translate ebook into a specified language.
+- **直接 HTML 翻译支持**
+  - 新增“直接翻译 HTML 代码”选项。
+  - 直接发送原始 HTML 标签给翻译引擎，完美保留电子书的复杂排版、公式和样式（建议在使用“仅显示译文”位置时开启）。
 
-__Plugin Homepage__: [https://translator.bookfere.com](https://translator.bookfere.com)
-
-![Translation illustration](images/sample-en.png)
-
----
-
-## Features
-
-* Support both "Advanced Mode" and "Batch Mode" for different usage situations.
-* Support languages supported by the selected translation engine (e.g. Google Translate supports 134 languages)
-* Support multiple translation engines, including Google Translate, ChatGPT, Gemini, DeepL, etc.
-* Support custom translation engines (you can configure to parse response in JSON or XML format)
-* Support all ebook formats supported by Calibre (48 input formats, 20 output formats), as well as additional formats such as .srt
-* Support to translate more than one ebooks. The translation process of each book is carried out simultaneously without affecting one another
-* Support caching translated content, with no need to re-translate after request failure or network interruption
-* Provide a large number of customization settings, such as saving translated ebooks to Calibre library or designated location
-
----
-
-## Manual
-
-* [Tutorial](https://github.com/bookfere/Ebook-Translator-Calibre-Plugin/wiki#a-brief-tour)
-* [Installation](https://github.com/bookfere/Ebook-Translator-Calibre-Plugin/wiki/English#installation)
-* [Usage](https://github.com/bookfere/Ebook-Translator-Calibre-Plugin/wiki/English#usage)
-* [Settings](https://github.com/bookfere/Ebook-Translator-Calibre-Plugin/wiki/English#settings)
-
----
-
-## Links
-
-* [GitHub ](https://github.com/bookfere/Ebook-Translator-Calibre-Plugin)
-* [MobileRead](https://www.mobileread.com/forums/showthread.php?t=353052)
-* [Release](https://github.com/bookfere/Ebook-Translator-Calibre-Plugin/releases)
-* [Contributing](CONTRIBUTING.md)
-* [Donate](https://www.paypal.com/paypalme/bookfere)
-
----
-
-## License
-
-[GNU General Public License v3.0](LICENSE)
+## 鸣谢
+感谢原作者 [bookfere](https://github.com/bookfere) 的优秀作品。

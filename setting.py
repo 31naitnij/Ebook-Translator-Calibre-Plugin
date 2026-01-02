@@ -942,14 +942,33 @@ class TranslationSetting(QDialog):
         names = ('TopToBottom', 'BottomToTop', 'LeftToRight', 'RightToLeft')
         directions = [getattr(QBoxLayout.Direction, name) for name in names]
 
+        # HTML direct translation
+        self.html_translate = QCheckBox(_('Translate HTML directly (no text extraction)'))
+        self.html_translate.setToolTip(_(
+            'This option will send the raw HTML code of elements to the '
+            'translation engine. Only effective when "With no original" '
+            'is selected.'))
+        self.html_translate.setChecked(self.config.get('html_translate', False))
+
         def choose_option(btn_id):
             original_sample.setVisible(btn_id != 4)
             position_samples.layout().setDirection(
                 directions[btn_id] if btn_id != 4 else directions[0])
             position_setup.setVisible(btn_id in [2, 3])
+            self.html_translate.setEnabled(btn_id == 4)
+            if btn_id != 4:
+                self.html_translate.setChecked(False)
             self.config.update(translation_position=position_map.get(btn_id))
         choose_option(position_btn_group.checkedId())
         position_btn_group.idClicked.connect(choose_option)
+
+        html_translate_group = QGroupBox(_('HTML Direct Translation'))
+        html_translate_layout = QVBoxLayout(html_translate_group)
+        html_translate_layout.addWidget(self.html_translate)
+        html_translate_layout.addWidget(QLabel('%s%s' % (
+            _('Tip: '),
+            _('This may break the layout if the engine modifies HTML tags.'))))
+        layout.addWidget(html_translate_group)
 
         # Color group
         color_group = QWidget()
@@ -1439,6 +1458,9 @@ class TranslationSetting(QDialog):
         self.config.delete('reserve_rules')
         if reserve_rules:
             self.config.update(reserve_rules=reserve_rules)
+
+        # HTML direct translation
+        self.config.update(html_translate=self.html_translate.isChecked())
 
         # Ebook metadata
         ebook_metadata = self.config.get('ebook_metadata') or {}

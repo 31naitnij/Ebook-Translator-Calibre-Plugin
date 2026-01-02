@@ -155,6 +155,7 @@ class Translation:
     def translate_paragraph(self, paragraph):
         if self.cancel_request():
             raise TranslationCanceled(_('Translation canceled.'))
+        self.streaming(paragraph)  # Notify UI about which paragraph is being processed
         if paragraph.translation and not self.fresh:
             paragraph.is_cache = True
             return
